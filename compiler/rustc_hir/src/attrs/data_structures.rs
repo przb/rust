@@ -297,6 +297,9 @@ pub enum AttributeKind {
     /// Represents `#[const_trait]`.
     ConstTrait(Span),
 
+    /// Represents `#[coroutine]`.
+    Coroutine(Span),
+
     /// Represents `#[coverage(..)]`.
     Coverage(Span, CoverageAttrKind),
 
@@ -359,6 +362,9 @@ pub enum AttributeKind {
 
     /// Represents `#[macro_escape]`.
     MacroEscape(Span),
+
+    /// Represents [`#[macro_export}`](https://doc.rust-lang.org/reference/macros-by-example.html#r-macro.decl.scope.path).
+    MacroExport { span: Span, local_inner_macros: bool },
 
     /// Represents `#[rustc_macro_transparency]`.
     MacroTransparency(Transparency),

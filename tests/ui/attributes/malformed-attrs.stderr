@@ -55,12 +55,6 @@ error: malformed `patchable_function_entry` attribute input
 LL | #[patchable_function_entry]
    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: must be of the form: `#[patchable_function_entry(prefix_nops = m, entry_nops = n)]`
 
-error: malformed `coroutine` attribute input
-  --> $DIR/malformed-attrs.rs:112:5
-   |
-LL |     #[coroutine = 63] || {}
-   |     ^^^^^^^^^^^^^^^^^ help: must be of the form: `#[coroutine]`
-
 error: malformed `must_not_suspend` attribute input
   --> $DIR/malformed-attrs.rs:133:1
    |
@@ -135,21 +129,6 @@ error: malformed `no_link` attribute input
    |
 LL | #[no_link()]
    | ^^^^^^^^^^^^ help: must be of the form: `#[no_link]`
-
-error: malformed `macro_export` attribute input
-  --> $DIR/malformed-attrs.rs:215:1
-   |
-LL | #[macro_export = 18]
-   | ^^^^^^^^^^^^^^^^^^^^
-   |
-help: the following are the possible correct uses
-   |
-LL - #[macro_export = 18]
-LL + #[macro_export(local_inner_macros)]
-   |
-LL - #[macro_export = 18]
-LL + #[macro_export]
-   |
 
 error: malformed `allow_internal_unsafe` attribute input
   --> $DIR/malformed-attrs.rs:217:1
@@ -445,6 +424,15 @@ LL | #[proc_macro = 18]
    | |            didn't expect any arguments here
    | help: must be of the form: `#[proc_macro]`
 
+error[E0565]: malformed `coroutine` attribute input
+  --> $DIR/malformed-attrs.rs:112:5
+   |
+LL |     #[coroutine = 63] || {}
+   |     ^^^^^^^^^^^^----^
+   |     |           |
+   |     |           didn't expect any arguments here
+   |     help: must be of the form: `#[coroutine]`
+
 error[E0565]: malformed `proc_macro_attribute` attribute input
   --> $DIR/malformed-attrs.rs:117:1
    |
@@ -566,6 +554,12 @@ error: valid forms for the attribute are `#[macro_use(name1, name2, ...)]` and `
    |
 LL | #[macro_use = 1]
    | ^^^^^^^^^^^^^^^^
+
+error: valid forms for the attribute are `#[macro_export(local_inner_macros)]` and `#[macro_export]`
+  --> $DIR/malformed-attrs.rs:215:1
+   |
+LL | #[macro_export = 18]
+   | ^^^^^^^^^^^^^^^^^^^^
 
 error[E0565]: malformed `type_const` attribute input
   --> $DIR/malformed-attrs.rs:144:5
